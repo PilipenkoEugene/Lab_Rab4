@@ -1,0 +1,53 @@
+using System;
+using System.IO;
+
+public class HelloWorld
+{
+    static public void Main ()
+    {
+        TextReader save_in = Console.In;
+        TextWriter save_out = Console.Out;
+        var new_out = new StreamWriter(@"output.txt");
+        var new_in = new StreamReader(@"input.txt");
+        
+        int n = Convert.ToInt32(Console.ReadLine());
+        string s1 = Console.ReadLine();
+        string[] s = s1.Split(' ');
+        int[] m = new int[n];
+        
+        for(int i = 0; i < n; i++)
+            m[i] = Convert.ToInt32(s[i]);
+        
+        int m8, m12;
+        m8 = 10000000;
+        m12 = m8;
+        
+        for(int i = 0; i < n; i++)
+        {
+            if(m[i] % 8 == 0 && m[i] < m8)
+                m8 = m [i];
+            if(m[i] % 12 == 0 && m[i] < m12)
+                m12 = m[i];
+        }
+        if(m8 == 10000000)
+            Console.WriteLine("No");
+        else
+            Console.WriteLine(m8);
+            
+        if(m12 == 10000000)
+            Console.WriteLine("No");
+        else
+            Console.WriteLine(m12);
+        
+        for(int i = 0; i < n; i++)
+            if(Math.Abs(m[i]) > 15000)
+                Console.Write("+ ");
+            else 
+                Console.Write(m[i] + " ");
+        Console.SetOut(save_out);
+        new_out.Close();
+        Console.SetIn(save_in);
+        new_in.Close();
+    } 
+   
+}
